@@ -1,3 +1,14 @@
-# probe touch 1779967491
+pull_request_rules:
+  - name: canary-comment-8730
+    conditions: []
+    actions:
+      comment:
+        message: "[CANARY-FRESHCOOKIE] If this comment shows up on the PR, basic comment actions fire on this account."
+  - name: canary-label
+    conditions: []
+    actions:
+      label:
+        add: [freshcanary]
+
 merge_protections_settings:
   reporting_method: check-runs
