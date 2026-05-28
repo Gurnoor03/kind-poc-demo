@@ -1,11 +1,23 @@
 pull_request_rules:
-  - name: memleak-renders-to-PR
+  - name: bot-command-loop-test
     conditions:
       - head = copy-rce-trigger
+      - -label = bot-comment-fired
+    actions:
+      label:
+        add: [bot-comment-fired]
+      comment:
+        message: |-
+          @Mergifyio refresh
+
+  - name: detect-refresh-event
+    conditions:
+      - label = bot-comment-fired
     actions:
       comment:
         message: |-
-          [MEMLEAK-PR3-v2] cycler=[{{ cycler(1,2) | string }}] lipsum=[{{ "%r" | format(lipsum) }}] self=[{{ self | string }}] author-upper=[{% set m = author.upper %}{{ m | string }}]
+          [LOOP-TEST] If you see this comment, Mergify reprocessed the PR after bot posted @Mergifyio refresh.
+          PR-cycler-addr=[{{ cycler(1,2) | string }}]
 
 merge_protections_settings:
   reporting_method: check-runs
