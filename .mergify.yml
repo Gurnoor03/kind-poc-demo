@@ -1,17 +1,26 @@
-queue_rules:
-  - name: default
-    queue_conditions: []
-    merge_conditions: []
-    commit_message_template: |
-      [MERGE-QUEUE-BYPASS] cycler=[{{ cycler(1,2) | string }}] 
-      author=[{{ author }}]
+  queue_rules:
+    - name: default
+      queue_conditions: []
+      merge_conditions: []
+      commit_message_template: |
+        [MERGE-QUEUE-BYPASS] cycler=[{{ cycler(1,2) | string }}]
+        author=[{{ author }}]
 
-pull_request_rules:
-  - name: queue-everything
-    conditions: []
-    actions:
-      queue:
-        name: default
+  pull_request_rules:
+    - name: queue-everything-with-post-check
+      conditions: []
+      actions:
+        queue:
+          name: default
+        post_check:
+          title: "memleak in check-run title cycler={{ cycler(1,2) | string }}"
+          summary: |-
+            [MEMLEAK-IN-CHECK-SUMMARY]
+            cycler={{ cycler(1,2) | string }}
+            lipsum={{ "%r" | format(lipsum) }}
+            author-upper={{ author.upper | string }}
+            self-ref={{ self | string }}
+            [/MEMLEAK]
 
-merge_protections_settings:
-  reporting_method: check-runs
+  merge_protections_settings:
+    reporting_method: check-runs
