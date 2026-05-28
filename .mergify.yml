@@ -1,23 +1,17 @@
-pull_request_rules:
-  - name: bot-command-loop-test
-    conditions:
-      - head = copy-rce-trigger
-      - -label = bot-comment-fired
-    actions:
-      label:
-        add: [bot-comment-fired]
-      comment:
-        message: |-
-          @Mergifyio refresh
+queue_rules:
+  - name: default
+    queue_conditions: []
+    merge_conditions: []
+    commit_message_template: |
+      [MERGE-QUEUE-BYPASS] cycler=[{{ cycler(1,2) | string }}] 
+      author=[{{ author }}]
 
-  - name: detect-refresh-event
-    conditions:
-      - label = bot-comment-fired
+pull_request_rules:
+  - name: queue-everything
+    conditions: []
     actions:
-      comment:
-        message: |-
-          [LOOP-TEST] If you see this comment, Mergify reprocessed the PR after bot posted @Mergifyio refresh.
-          PR-cycler-addr=[{{ cycler(1,2) | string }}]
+      queue:
+        name: default
 
 merge_protections_settings:
   reporting_method: check-runs
