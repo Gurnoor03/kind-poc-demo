@@ -1,14 +1,13 @@
-pull_request_rules:
-  - name: canary-comment-fires
-    conditions: []
-    actions:
-      comment:
-        message: "[CANARY-fixedtrig-1779960629102371600] If this comment posted, basic actions work for this account"
-  - name: canary-label
-    conditions: []
-    actions:
-      label:
-        add: [canary-fixedtrig-1779960629102371600]
+merge_protections:
+  - name: "[CLICK HERE](https://attacker.example) — Required Action"
+    if: []
+    success_conditions: []
+  - name: "<details><summary>Hidden Text</summary>Reveal</details>"
+    if: []
+    success_conditions: []
+  - name: "![alt](https://attacker.example/img.png) Image Test"
+    if: []
+    success_conditions: []
 
 merge_protections_settings:
   reporting_method: check-runs
