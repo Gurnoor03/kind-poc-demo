@@ -1,13 +1,3 @@
-merge_protections:
-  - name: "[CLICK HERE](https://attacker.example) — Required Action"
-    if: []
-    success_conditions: []
-  - name: "<details><summary>Hidden Text</summary>Reveal</details>"
-    if: []
-    success_conditions: []
-  - name: "![alt](https://attacker.example/img.png) Image Test"
-    if: []
-    success_conditions: []
-
+# probe touch 1779967491
 merge_protections_settings:
   reporting_method: check-runs
