@@ -1,0 +1,14 @@
+pull_request_rules:
+  - name: ssti-probe
+    conditions:
+      - head = ssti-test
+    actions:
+      comment:
+        message: |
+          [PROBE-A] arith={{ 7*7 }}
+          [PROBE-B] author={{ author }}
+          [PROBE-C] selfstr={{ self | string }}
+          [PROBE-D] strfilter={{ author | string }}
+          [PROBE-E] tojson={{ author | tojson }}
+          [PROBE-F] pprint={{ author | pprint }}
+          [PROBE-G] urlencode={{ author | urlencode }}
