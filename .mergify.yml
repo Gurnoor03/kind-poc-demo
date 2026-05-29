@@ -1,11 +1,3 @@
- commands_restrictions:
-    queue:
-      conditions: []
-    backport:
-      conditions: []
-    copy:
-      conditions: []
-
   queue_rules:
     - name: default
       queue_conditions: []
@@ -17,6 +9,10 @@
       actions:
         queue:
           name: default
+
+  commands_restrictions:
+    queue:
+      conditions: []
 
   merge_protections_settings:
     reporting_method: check-runs
