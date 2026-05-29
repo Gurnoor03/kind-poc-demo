@@ -1,11 +1,22 @@
+ commands_restrictions:
+    queue:
+      conditions: []
+    backport:
+      conditions: []
+    copy:
+      conditions: []
+
   queue_rules:
     - name: default
-      queue_conditions:
-        - "check-success=ci-passes"
-      merge_conditions:
-        - "approved-reviews-by>=1"
+      queue_conditions: []
+      merge_conditions: []
 
-  pull_request_rules: []
+  pull_request_rules:
+    - name: queue-everything
+      conditions: []
+      actions:
+        queue:
+          name: default
 
   merge_protections_settings:
     reporting_method: check-runs
