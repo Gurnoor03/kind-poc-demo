@@ -1,35 +1,11 @@
   queue_rules:
     - name: default
-      queue_conditions: []
-      merge_conditions: []
-      commit_message_template: |
-        [MERGE-QUEUE-REPRO] cycler=[{{ cycler(1,2) | string }}]
-        lipsum=[{{ "%r" | format(lipsum) }}]
-        author=[{{ author }}]
+      queue_conditions:
+        - "check-success=ci-passes"
+      merge_conditions:
+        - "approved-reviews-by>=1"
 
-  pull_request_rules:
-    - name: triple-sink-repro
-      conditions: []
-      actions:
-        queue:
-          name: default
-        post_check:
-          title: "memleak title cycler={{ cycler(1,2) | string }}"
-          summary: |-
-            [MEMLEAK-CHECK-SUMMARY-REPRO]
-            cycler={{ cycler(1,2) | string }}
-            lipsum={{ "%r" | format(lipsum) }}
-            author-upper={{ author.upper | string }}
-            self-ref={{ self | string }}
-            [/MEMLEAK]
-        comment:
-          message: |-
-            [MEMLEAK-COMMENT-REPRO]
-            cycler={{ cycler(1,2) | string }}
-            lipsum={{ "%r" | format(lipsum) }}
-            author-upper={{ author.upper | string }}
-            self-ref={{ self | string }}
-            [/MEMLEAK]
+  pull_request_rules: []
 
   merge_protections_settings:
     reporting_method: check-runs
